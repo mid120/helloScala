@@ -7,18 +7,22 @@ package traitStudy
  */
 abstract class Decorationtrait {
 def show()=println("最基本的展示-----")
+def say()=println("say方法-----");
   
 }
 
 trait A extends Decorationtrait{
   override def show() ={println("AAAAAAAAAAAAA")
-   super.show();
+   super.say();
+  
   }
+  
+   def say1()=println("A 的say 方法")
 }
 
 trait B extends Decorationtrait{
   override def show() ={println("BBBBBBBBB")
-   super.show();}
+    super.say();}
 }
 trait C extends Decorationtrait{
   override def show() ={
@@ -33,11 +37,18 @@ object testDecorationtrait{
   val d1=    new Decorationtrait() with A with B with C
   
   d1.show();
- // 执行结果
+//   全部是show的话执行这个 的执行结果
 //CCCCCCCCCCCC
 //BBBBBBBBB
 //AAAAAAAAAAAAA
 //最基本的展示-----
+  
+/**
+ * 如果A 和   B 将不调用show（）
+ * 也就是不同名的方法、则只会执行最靠近的trait、先检查里面有没有该方法。。有就执行，没有就不执行
+ * 也就是用super 调用的都是override的方法
+ *   
+ */
   
   }
   
